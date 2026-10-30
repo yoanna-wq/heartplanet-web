@@ -1,319 +1,405 @@
-<!-- ═══════════════════════════════════════════════════════
-  PELTA — 브랜드 페이지 v4
-  · 메인 컬러: 소프트 라벤더 (#8A63D2 / 글로우 #C9B8F0)
-  · In Motion: 스크롤에 따라 그립삭스 발바닥이 회전하며
-    그립 도트가 차오르는 코드 애니메이션 (별도 미디어 파일 불필요)
-  · 로고는 HTML에 인라인 포함 (별도 파일 불필요)
-  ▶ pelta.html 로 저장해 깃허브 업로드
-  ▶ 제품컷: images/pelta-grip-1.jpg, pelta-grip-2.jpg
-═══════════════════════════════════════════════════════ -->
-
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PELTA · A little support in every move.</title>
+<meta name="description" content="모든 움직임에 작은 응원을. 발바닥에 응원을 새긴 그립삭스, PELTA.">
+<meta property="og:title" content="PELTA">
+<meta property="og:description" content="A little support in every move. 모든 움직임에 작은 응원을">
+<meta property="og:image" content="/images/hero.jpg">
+<link rel="icon" href="/images/logo.png">
+<style>html{scroll-behavior:smooth;}body{margin:0;}.pt-pop__done{margin:8px 0;font-size:15px;line-height:1.6;}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,600;0,800;1,900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
-
-  .pt-wrap { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #FFFFFF; color: #17141F; }
-  .pt-wrap * { box-sizing: border-box; margin: 0; }
-  .pt-display { font-family: 'Archivo', 'Noto Sans KR', sans-serif; }
-  .pt-section { padding: 92px 24px; }
-  .pt-inner { max-width: 1080px; margin: 0 auto; }
-  .pt-accent { color: #8A63D2; }
-
-  .pt-top { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; background: #141020; position: sticky; top: 0; z-index: 50; }
-  .pt-top a { text-decoration: none; color: rgba(255,255,255,.65); font-size: 12px; letter-spacing: .08em; font-weight: 700; }
-  .pt-top a:hover { color: #fff; }
-
-  .pt-hero { background: #141020; color: #fff; text-align: center; padding: 116px 24px 126px; position: relative; overflow: hidden; }
-  .pt-hero .pt-logo-main { width: min(620px, 84%); margin: 0 auto; position: relative; }
-  .pt-hero .pt-tag { margin-top: 34px; font-size: clamp(15px, 2.4vw, 20px); font-weight: 800; letter-spacing: .3em; color: #C9B8F0; position: relative; }
-  .pt-hero .pt-sub { margin-top: 20px; font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.85; position: relative; }
-  .pt-hero .pt-glow { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 820px; height: 500px; border-radius: 50%; background: radial-gradient(closest-side, rgba(201,184,240,.28), rgba(201,184,240,0)); pointer-events: none; }
-
-  .pt-origin { border-bottom: 1px solid #F2F0F7; }
-  .pt-origin .pt-grid { display: grid; gap: 40px; }
-  @media (min-width: 860px) { .pt-origin .pt-grid { grid-template-columns: 1fr 1.2fr; align-items: center; } }
-  .pt-label { font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #8A63D2; }
-  .pt-origin h2 { margin-top: 14px; font-size: clamp(24px, 3.8vw, 36px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.4; }
-  .pt-origin p { font-size: 15px; line-height: 1.9; color: #5E586C; }
-
-  .pt-statement { background: linear-gradient(160deg, #B9A3EC 0%, #8A63D2 100%); color: #fff; text-align: center; }
-  .pt-statement h2 { font-size: clamp(24px, 4.4vw, 42px); font-weight: 900; line-height: 1.45; letter-spacing: -0.01em; }
-  .pt-statement h2 em { font-style: normal; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 8px; }
-  .pt-statement p { margin-top: 24px; max-width: 620px; margin-left: auto; margin-right: auto; font-size: 15px; line-height: 1.85; color: rgba(255,255,255,.85); }
-
-  /* In Motion — 스크롤 회전 발 */
-  .pt-active { background: #141020; color: #fff; }
-  .pt-active-head { text-align: center; padding: 80px 24px 10px; }
-  .pt-scrolly { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr; }
-  @media (min-width: 860px) { .pt-scrolly { grid-template-columns: 1fr 1fr; gap: 40px; padding: 0 24px; } }
-  .pt-media-col { position: sticky; top: 76px; height: 62vh; display: flex; align-items: center; justify-content: center; padding: 16px 24px; z-index: 1; }
-  @media (min-width: 860px) { .pt-media-col { height: calc(100vh - 76px); padding: 24px 0; } }
-  .pt-media-frame { position: relative; width: 100%; max-width: 460px; aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; background: radial-gradient(120% 100% at 50% 35%, #241C3E 0%, #171226 60%, #141020 100%); box-shadow: 0 24px 60px rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; }
-  .pt-foot-stage { width: 78%; max-width: 340px; }
-  .pt-foot-rotor { transform-origin: 100px 165px; transform-box: view-box; will-change: transform; }
-  .pt-dot { fill: #8A63D2; opacity: .28; animation: ptDotPulse 1.6s ease-in-out infinite; }
-  @keyframes ptDotPulse { 0%,100% { opacity: .28; } 50% { opacity: 1; } }
-  .pt-ring { fill: none; stroke: #C9B8F0; stroke-width: 1.6; opacity: 0; transition: opacity .6s ease; }
-  .pt-ring.r2 { stroke-dasharray: 10 14; }
-  .pt-tick { stroke: #C9B8F0; stroke-width: 3; stroke-linecap: round; opacity: 0; transition: opacity .6s ease; }
-  .pt-media-frame[data-mode="1"] .pt-ring { opacity: .5; }
-  .pt-media-frame[data-mode="1"] .pt-dot { animation-duration: 1s; }
-  .pt-media-frame[data-mode="2"] .pt-ring { opacity: .85; }
-  .pt-media-frame[data-mode="2"] .pt-tick { opacity: .9; }
-  .pt-media-frame[data-mode="2"] .pt-dot { animation-duration: .7s; fill: #A98BE6; }
-  .pt-media-frame .pt-caption { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: .22em; color: #6C6486; font-weight: 700; }
-  .pt-steps { position: relative; z-index: 2; padding: 0 24px; }
-  .pt-step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; }
-  .pt-step .pt-no { font-family: 'Archivo', sans-serif; font-weight: 900; font-style: italic; font-size: 15px; letter-spacing: .2em; color: #C9B8F0; }
-  .pt-step h3 { margin-top: 12px; font-size: clamp(26px, 4vw, 40px); font-weight: 900; letter-spacing: -0.01em; line-height: 1.3; }
-  .pt-step p { margin-top: 14px; font-size: 15px; line-height: 1.85; color: rgba(255,255,255,.6); max-width: 420px; }
-
-  .pt-h2 { margin-top: 14px; font-size: clamp(26px, 4vw, 38px); font-weight: 900; letter-spacing: -0.02em; }
-  .pt-products { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; }
-  .pt-product .pt-photo { position: relative; aspect-ratio: 3/4; background: linear-gradient(160deg, #F5F3FA 0%, #ECE8F5 100%); border-radius: 18px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .pt-product .pt-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
-  .pt-product:hover .pt-photo img { transform: scale(1.04); }
-  .pt-product .pt-photo span { font-size: 11px; letter-spacing: .12em; color: #B9B2C9; }
-  .pt-product h3 { margin-top: 14px; font-size: 15px; font-weight: 800; }
-  .pt-product p { margin-top: 4px; font-size: 13px; color: #9C94AD; }
-
-  .pt-band { border-top: 1px solid #F2F0F7; border-bottom: 1px solid #F2F0F7; padding: 26px 0; overflow: hidden; background: #fff; }
-  .pt-band-inner { display: flex; gap: 48px; width: max-content; animation: ptSlide 24s linear infinite; }
-  .pt-band span { font-family: 'Archivo', sans-serif; font-weight: 900; font-style: italic; font-size: 20px; letter-spacing: .12em; color: #E7E3F0; white-space: nowrap; }
-  .pt-band span b { color: #8A63D2; }
-  @keyframes ptSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .pt-band-inner, .pt-dot { animation: none; } }
-
-  .pt-cta { text-align: center; }
-  .pt-cta h2 { font-size: clamp(30px, 5vw, 52px); font-weight: 900; font-style: italic; letter-spacing: .01em; }
-  .pt-btn { display: inline-block; margin-top: 34px; padding: 17px 44px; background: #8A63D2; color: #fff; font-weight: 800; font-size: 15px; letter-spacing: .06em; border-radius: 999px; text-decoration: none; box-shadow: 0 12px 30px rgba(138,99,210,.3); transition: transform .2s ease, box-shadow .2s ease; }
-  .pt-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(138,99,210,.4); }
-  .pt-cta .pt-note { margin-top: 16px; font-size: 13px; color: #9C94AD; }
-
-  .pt-footer { border-top: 1px solid #F2F0F7; padding: 28px 24px; font-size: 11px; color: #9C94AD; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; }
-  .pt-footer a { color: #8A63D2; text-decoration: none; font-weight: 700; }
-
-  /* ── 인트로 게이트 (이미지 → 양말 줌 → 페이지 진입) ── */
-  .pt-intro { position: fixed; inset: 0; z-index: 200; background: #EDEBF2; display: none; align-items: center; justify-content: center; overflow: hidden; }
-  .pt-intro.ready { display: flex; }
-  .pt-intro img.pt-intro-img { width: 100%; height: 100%; object-fit: cover; transform-origin: var(--zx, 50%) var(--zy, 55%); transition: transform 1s cubic-bezier(.5,0,.15,1); display: block; }
-  .pt-intro .pt-intro-hint { position: absolute; bottom: 34px; left: 0; right: 0; text-align: center; font-family: 'Archivo','Noto Sans KR',sans-serif; font-weight: 800; font-size: 12px; letter-spacing: .3em; color: #17141F; opacity: .75; animation: ptHint 1.6s ease-in-out infinite; }
-  @keyframes ptHint { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
-  .pt-intro.zooming img.pt-intro-img { transform: scale(7); }
-  .pt-intro.zooming { transition: opacity .45s ease .55s; opacity: 0; pointer-events: none; }
-  .pt-intro-fb { display: none; text-align: center; transform-origin: 50% 50%; transition: transform 1s cubic-bezier(.5,0,.15,1); }
-  .pt-intro.fallback { background: #141020; }
-  .pt-intro.fallback .pt-intro-img { display: none; }
-  .pt-intro.fallback .pt-intro-fb { display: block; }
-  .pt-intro.fallback .pt-intro-hint { color: #C9B8F0; }
-  .pt-intro-fb-mark { font-size: clamp(64px, 14vw, 150px); font-weight: 900; font-style: italic; color: #fff; letter-spacing: .02em; }
-  .pt-intro-fb-sub { margin-top: 14px; font-size: 11px; letter-spacing: .24em; color: #6C6486; font-weight: 700; }
-  .pt-intro.fallback.zooming .pt-intro-fb { transform: scale(7); }
-  @media (prefers-reduced-motion: reduce) {
-    .pt-intro img.pt-intro-img { transition: none; }
-    .pt-intro.zooming img.pt-intro-img { transform: none; }
-    .pt-intro.zooming { transition: opacity .3s ease; }
-    .pt-intro .pt-intro-hint { animation: none; }
-  }
+:root{
+  --pt-ink:#1D1428; --pt-purple:#6638B6; --pt-lime:#D4F34A; --pt-lav:#C9B8F0;
+  --pt-cream:#F3EFE8; --pt-mist:#F7F7F7; --pt-mute:#6B6077;
+  --pt-en:'Instrument Serif',Georgia,serif;
+  --pt-krs:'Noto Serif KR',Georgia,serif;
+  --pt-kr:'Noto Sans KR',-apple-system,'Apple SD Gothic Neo',sans-serif;
+  --pt-wrap:1320px; --pt-pad:clamp(20px,4vw,56px);
+}
+.pt-sec{font-family:var(--pt-kr);color:var(--pt-ink);padding:clamp(64px,9vw,128px) var(--pt-pad);}
+.pt-wrap{max-width:var(--pt-wrap);margin:0 auto;}
+.pt-en{font-family:var(--pt-en);font-style:italic;font-weight:400;}
+.pt-h2{font-family:var(--pt-kr);font-weight:700;font-size:clamp(26px,3.2vw,40px);line-height:1.35;letter-spacing:-.02em;margin:0;}
+.pt-body{font-size:16px;line-height:1.75;color:var(--pt-mute);margin:0;}
+.pt-btn{display:inline-block;padding:15px 30px;border-radius:999px;background:var(--pt-ink);color:#fff;font:500 15px/1 var(--pt-kr);text-decoration:none;transition:background .2s;}
+.pt-btn:hover{background:var(--pt-purple);color:#fff;}
+.pt-btn:focus-visible,.pt-link:focus-visible{outline:2px solid var(--pt-purple);outline-offset:3px;}
+.pt-link{color:inherit;font-size:15px;text-decoration:underline;text-underline-offset:5px;}
+@media (prefers-reduced-motion:reduce){.pt-sec *{transition:none!important;}}
 </style>
 
-<div class="pt-wrap">
-
-  <!-- ═══════ 인트로 게이트 ═══════
-       images/pelta-intro.jpg 가 있으면 자동 활성화 (없으면 그냥 본문부터).
-       --zx / --zy = 확대 중심(양말 위치)의 가로/세로 퍼센트 -->
-  <div class="pt-intro" id="ptIntro" style="--zx: 50%; --zy: 56%;">
-    <img class="pt-intro-img" id="ptIntroImg" src="images/pelta-intro.jpg" alt="PELTA intro" />
-    <!-- 이미지 없을 때 임시 인트로 (pelta-intro.jpg 올리면 자동으로 이미지로 대체) -->
-    <div class="pt-intro-fb" id="ptIntroFb">
-      <p class="pt-intro-fb-mark pt-display">PELTA</p>
-      <p class="pt-intro-fb-sub pt-display">INTRO IMAGE &#8212; images/pelta-intro.jpg</p>
-    </div>
-    <p class="pt-intro-hint" id="ptIntroHint">SCROLL &#8595;</p>
-  </div>
-
-  <div class="pt-top">
-    <a href="index.html">&#8592; HEARTPLANET</a>
-    <div style="height:20px; display:flex; align-items:center;" aria-label="PELTA"><svg style="height:20px; width:auto; display:block;" id="_레이어_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1105.08 385.23"><defs><style>.cls-1{fill:#fff;}</style></defs><path class="cls-1" d="M403.37,291.39c0-4.91,3.07-7.05,6.13-9.2,3.07-2.15,6.14-4.61,6.14-9.21V115.32c0-4.91-3.07-7.05-6.14-9.2-3.06-2.15-6.13-4.6-6.13-9.2s3.37-7.06,7.97-7.06h89.26c44.17,0,73.31,26.69,73.31,68.1s-29.75,68.71-78.53,68.71h-50.92v46.32c0,4.6,3.68,6.75,7.36,8.9,3.68,2.15,6.75,4.61,6.75,9.51,0,4.6-3.06,7.05-7.97,7.05h-39.26c-4.6,0-7.97-2.45-7.97-7.05ZM444.47,103.66v98.77c14.42,7.67,33.13,11.35,46.32,11.35,36.81,0,54.29-20.55,54.29-48.46s-18.1-61.65-52.76-61.65h-47.85Z"/><path class="cls-1" d="M587.36,220.22c0-47.85,30.98-81.29,78.53-81.29,34.97,0,58.28,17.79,58.28,43.86,0,32.21-35.27,45.09-107.97,45.71,5.52,30.37,24.85,53.99,57.05,53.99,25.15,0,35.58-12.27,42.33-20.25,3.07-3.68,5.22-6.13,7.67-6.13,1.84,0,3.37,1.22,3.37,5.21,0,14.42-19.32,40.18-61.65,40.18-45.71,0-77.61-31.29-77.61-81.29ZM614.66,217.77c61.04-.61,82.82-12.58,82.82-35.89,0-18.71-13.19-31.6-33.74-31.6-29.14,0-49.39,25.77-49.39,59.2,0,2.76,0,5.52.31,8.28Z"/><path class="cls-1" d="M741.8,292c0-4.29,2.76-6.14,5.52-7.98,3.07-2.15,5.83-4.29,5.83-8.9V109.8c0-5.83-3.37-8.28-6.44-10.43-2.76-2.15-5.52-4.29-5.52-8.59,0-3.99,3.07-7.05,7.36-7.05h21.47c6.13,0,10.12,4.29,10.12,10.73v180.67c0,4.6,2.76,6.75,5.83,8.9,2.76,1.84,5.52,3.68,5.52,7.98,0,3.99-2.76,6.44-7.05,6.44h-35.27c-4.29,0-7.36-2.45-7.36-6.44Z"/><path class="cls-1" d="M824.95,266.23v-111.96h-18.71c-3.68,0-6.13-2.45-6.13-6.14,0-4.6,3.99-5.83,9.51-7.05,16.25-3.99,24.23-10.13,29.44-27.3,1.54-5.52,3.07-9.51,7.36-9.51,3.37,0,5.52,2.45,5.52,5.83v31.9h37.73c3.99,0,6.14,2.45,6.14,6.14,0,3.99-2.15,6.14-6.14,6.14h-37.73v110.12c0,12.27,7.06,20.25,17.79,20.25,6.44,0,11.35-2.77,15.64-5.22,3.07-1.84,5.83-3.37,7.97-3.37,2.46,0,4.29,1.84,4.29,4.6,0,7.67-15.34,20.85-36.5,20.85s-36.2-14.11-36.2-35.27Z"/><path class="cls-1" d="M911.56,259.49c0-36.5,42.03-51.22,105.52-51.84v-16.56c0-26.69-16.26-40.8-40.18-40.8s-26.99,12.58-30.06,23.62c-2.45,8.9-4.6,16.25-15.64,16.25-8.59,0-13.8-4.91-13.8-13.19,0-16.87,21.17-38.03,61.66-38.03,38.04,0,65.03,18.71,65.03,55.82v79.76c0,5.83,3.37,8.28,6.75,10.74,2.76,1.84,5.22,3.68,5.22,7.67,0,5.52-7.06,8.59-15.95,8.59-14.42,0-23.01-8.59-23.01-20.55-12.27,12.88-30.67,20.55-52.45,20.55-31.9,0-53.07-16.56-53.07-42.02ZM977.2,285.87c15.95,0,30.98-7.05,39.88-18.4v-43.86c-6.44-2.45-13.5-3.38-22.7-3.38-33.13,0-56.13,12.58-56.13,34.05,0,19.01,17.48,31.59,38.95,31.59Z"/><path class="cls-1" d="M261.22,110.94c-6.26-19.91-16.29-39.5-34.23-51.26-17.22-11.28-37.92-10.82-56.64-3.63-18.34,7.05-34.06,19.97-41.85,38.3-7.97,18.75-7.16,40.22-.24,59.12,4.55,12.42,10.98,24.3,13.04,37.5,1.64,10.47.09,25.46-10.03,31.59-1.82,1.1-5.56,3.96-1.78,4.93,3.68.94,9.62-2,12.62-3.81,18.15-11,20.49-31.29,14.55-50.23-3.25-10.36-8.28-20.05-11.7-30.36-2.94-8.86-4.45-18.16-4.27-27.5.35-18.09,7.44-37.07,21.97-48.48,12.67-9.95,29.12-9.37,43.02-1.99,20.19,10.71,31.03,31.83,37.63,52.81,1.15,3.65,19.25-2.69,17.9-6.98Z"/><path class="cls-1" d="M109.09,122.17c-19.91,6.26-39.5,16.29-51.26,34.23-11.28,17.22-10.82,37.92-3.63,56.64,7.05,18.34,19.97,34.06,38.3,41.85,18.75,7.97,40.22,7.16,59.12.24,12.42-4.55,24.3-10.98,37.5-13.04,10.47-1.64,25.46-.09,31.59,10.03,1.1,1.82,3.96,5.56,4.93,1.78.94-3.68-2-9.62-3.81-12.62-11-18.15-31.29-20.49-50.23-14.55-10.36,3.25-20.05,8.28-30.36,11.7-8.86,2.94-18.16,4.45-27.5,4.27-18.09-.35-37.07-7.44-48.48-21.97-9.95-12.67-9.37-29.12-1.99-43.02,10.71-20.19,31.83-31.03,52.81-37.63,3.65-1.15-2.69-19.25-6.98-17.9Z"/><path class="cls-1" d="M120.32,274.3c6.26,19.91,16.29,39.5,34.23,51.26,17.22,11.28,37.92,10.82,56.64,3.63,18.34-7.05,34.06-19.97,41.85-38.3,7.97-18.75,7.16-40.22.24-59.12-4.55-12.42-10.98-24.3-13.04-37.5-1.64-10.47-.09-25.46,10.03-31.59,1.82-1.1,5.56-3.96,1.78-4.93-3.68-.94-9.62,2-12.62,3.81-18.15,11-20.49,31.29-14.55,50.23,3.25,10.36,8.28,20.05,11.7,30.36,2.94,8.86,4.45,18.16,4.27,27.5-.35,18.09-7.44,37.07-21.97,48.48-12.67,9.95-29.12,9.37-43.02,1.99-20.19-10.71-31.03-31.83-37.63-52.81-1.15-3.65-19.25,2.69-17.9,6.98Z"/><path class="cls-1" d="M272.45,263.07c19.91-6.26,39.5-16.29,51.26-34.23,11.28-17.22,10.82-37.92,3.63-56.64-7.05-18.34-19.97-34.06-38.3-41.85-18.75-7.97-40.22-7.16-59.12-.24-12.42,4.55-24.3,10.98-37.5,13.04-10.47,1.64-25.46.09-31.59-10.03-1.1-1.82-3.96-5.56-4.93-1.78-.94,3.68,2,9.62,3.81,12.62,11,18.15,31.29,20.49,50.23,14.55,10.36-3.25,20.05-8.28,30.36-11.7,8.86-2.94,18.16-4.45,27.5-4.27,18.09.35,37.07,7.44,48.48,21.97,9.95,12.67,9.37,29.12,1.99,43.02-10.71,20.19-31.83,31.03-52.81,37.63-3.65,1.15,2.69,19.25,6.98,17.9Z"/></svg></div>
-    <a href="#pt-store">STORE</a>
-  </div>
-
-  <section class="pt-hero">
-    <div class="pt-glow"></div>
-    <div class="pt-logo-main" aria-label="PELTA"><svg style="width:100%; height:auto; display:block;" id="_레이어_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1105.08 385.23"><defs><style>.cls-1{fill:#fff;}</style></defs><path class="cls-1" d="M403.37,291.39c0-4.91,3.07-7.05,6.13-9.2,3.07-2.15,6.14-4.61,6.14-9.21V115.32c0-4.91-3.07-7.05-6.14-9.2-3.06-2.15-6.13-4.6-6.13-9.2s3.37-7.06,7.97-7.06h89.26c44.17,0,73.31,26.69,73.31,68.1s-29.75,68.71-78.53,68.71h-50.92v46.32c0,4.6,3.68,6.75,7.36,8.9,3.68,2.15,6.75,4.61,6.75,9.51,0,4.6-3.06,7.05-7.97,7.05h-39.26c-4.6,0-7.97-2.45-7.97-7.05ZM444.47,103.66v98.77c14.42,7.67,33.13,11.35,46.32,11.35,36.81,0,54.29-20.55,54.29-48.46s-18.1-61.65-52.76-61.65h-47.85Z"/><path class="cls-1" d="M587.36,220.22c0-47.85,30.98-81.29,78.53-81.29,34.97,0,58.28,17.79,58.28,43.86,0,32.21-35.27,45.09-107.97,45.71,5.52,30.37,24.85,53.99,57.05,53.99,25.15,0,35.58-12.27,42.33-20.25,3.07-3.68,5.22-6.13,7.67-6.13,1.84,0,3.37,1.22,3.37,5.21,0,14.42-19.32,40.18-61.65,40.18-45.71,0-77.61-31.29-77.61-81.29ZM614.66,217.77c61.04-.61,82.82-12.58,82.82-35.89,0-18.71-13.19-31.6-33.74-31.6-29.14,0-49.39,25.77-49.39,59.2,0,2.76,0,5.52.31,8.28Z"/><path class="cls-1" d="M741.8,292c0-4.29,2.76-6.14,5.52-7.98,3.07-2.15,5.83-4.29,5.83-8.9V109.8c0-5.83-3.37-8.28-6.44-10.43-2.76-2.15-5.52-4.29-5.52-8.59,0-3.99,3.07-7.05,7.36-7.05h21.47c6.13,0,10.12,4.29,10.12,10.73v180.67c0,4.6,2.76,6.75,5.83,8.9,2.76,1.84,5.52,3.68,5.52,7.98,0,3.99-2.76,6.44-7.05,6.44h-35.27c-4.29,0-7.36-2.45-7.36-6.44Z"/><path class="cls-1" d="M824.95,266.23v-111.96h-18.71c-3.68,0-6.13-2.45-6.13-6.14,0-4.6,3.99-5.83,9.51-7.05,16.25-3.99,24.23-10.13,29.44-27.3,1.54-5.52,3.07-9.51,7.36-9.51,3.37,0,5.52,2.45,5.52,5.83v31.9h37.73c3.99,0,6.14,2.45,6.14,6.14,0,3.99-2.15,6.14-6.14,6.14h-37.73v110.12c0,12.27,7.06,20.25,17.79,20.25,6.44,0,11.35-2.77,15.64-5.22,3.07-1.84,5.83-3.37,7.97-3.37,2.46,0,4.29,1.84,4.29,4.6,0,7.67-15.34,20.85-36.5,20.85s-36.2-14.11-36.2-35.27Z"/><path class="cls-1" d="M911.56,259.49c0-36.5,42.03-51.22,105.52-51.84v-16.56c0-26.69-16.26-40.8-40.18-40.8s-26.99,12.58-30.06,23.62c-2.45,8.9-4.6,16.25-15.64,16.25-8.59,0-13.8-4.91-13.8-13.19,0-16.87,21.17-38.03,61.66-38.03,38.04,0,65.03,18.71,65.03,55.82v79.76c0,5.83,3.37,8.28,6.75,10.74,2.76,1.84,5.22,3.68,5.22,7.67,0,5.52-7.06,8.59-15.95,8.59-14.42,0-23.01-8.59-23.01-20.55-12.27,12.88-30.67,20.55-52.45,20.55-31.9,0-53.07-16.56-53.07-42.02ZM977.2,285.87c15.95,0,30.98-7.05,39.88-18.4v-43.86c-6.44-2.45-13.5-3.38-22.7-3.38-33.13,0-56.13,12.58-56.13,34.05,0,19.01,17.48,31.59,38.95,31.59Z"/><path class="cls-1" d="M261.22,110.94c-6.26-19.91-16.29-39.5-34.23-51.26-17.22-11.28-37.92-10.82-56.64-3.63-18.34,7.05-34.06,19.97-41.85,38.3-7.97,18.75-7.16,40.22-.24,59.12,4.55,12.42,10.98,24.3,13.04,37.5,1.64,10.47.09,25.46-10.03,31.59-1.82,1.1-5.56,3.96-1.78,4.93,3.68.94,9.62-2,12.62-3.81,18.15-11,20.49-31.29,14.55-50.23-3.25-10.36-8.28-20.05-11.7-30.36-2.94-8.86-4.45-18.16-4.27-27.5.35-18.09,7.44-37.07,21.97-48.48,12.67-9.95,29.12-9.37,43.02-1.99,20.19,10.71,31.03,31.83,37.63,52.81,1.15,3.65,19.25-2.69,17.9-6.98Z"/><path class="cls-1" d="M109.09,122.17c-19.91,6.26-39.5,16.29-51.26,34.23-11.28,17.22-10.82,37.92-3.63,56.64,7.05,18.34,19.97,34.06,38.3,41.85,18.75,7.97,40.22,7.16,59.12.24,12.42-4.55,24.3-10.98,37.5-13.04,10.47-1.64,25.46-.09,31.59,10.03,1.1,1.82,3.96,5.56,4.93,1.78.94-3.68-2-9.62-3.81-12.62-11-18.15-31.29-20.49-50.23-14.55-10.36,3.25-20.05,8.28-30.36,11.7-8.86,2.94-18.16,4.45-27.5,4.27-18.09-.35-37.07-7.44-48.48-21.97-9.95-12.67-9.37-29.12-1.99-43.02,10.71-20.19,31.83-31.03,52.81-37.63,3.65-1.15-2.69-19.25-6.98-17.9Z"/><path class="cls-1" d="M120.32,274.3c6.26,19.91,16.29,39.5,34.23,51.26,17.22,11.28,37.92,10.82,56.64,3.63,18.34-7.05,34.06-19.97,41.85-38.3,7.97-18.75,7.16-40.22.24-59.12-4.55-12.42-10.98-24.3-13.04-37.5-1.64-10.47-.09-25.46,10.03-31.59,1.82-1.1,5.56-3.96,1.78-4.93-3.68-.94-9.62,2-12.62,3.81-18.15,11-20.49,31.29-14.55,50.23,3.25,10.36,8.28,20.05,11.7,30.36,2.94,8.86,4.45,18.16,4.27,27.5-.35,18.09-7.44,37.07-21.97,48.48-12.67,9.95-29.12,9.37-43.02,1.99-20.19-10.71-31.03-31.83-37.63-52.81-1.15-3.65-19.25,2.69-17.9,6.98Z"/><path class="cls-1" d="M272.45,263.07c19.91-6.26,39.5-16.29,51.26-34.23,11.28-17.22,10.82-37.92,3.63-56.64-7.05-18.34-19.97-34.06-38.3-41.85-18.75-7.97-40.22-7.16-59.12-.24-12.42,4.55-24.3,10.98-37.5,13.04-10.47,1.64-25.46.09-31.59-10.03-1.1-1.82-3.96-5.56-4.93-1.78-.94,3.68,2,9.62,3.81,12.62,11,18.15,31.29,20.49,50.23,14.55,10.36-3.25,20.05-8.28,30.36-11.7,8.86-2.94,18.16-4.45,27.5-4.27,18.09.35,37.07,7.44,48.48,21.97,9.95,12.67,9.37,29.12,1.99,43.02-10.71,20.19-31.83,31.03-52.81,37.63-3.65,1.15,2.69,19.25,6.98,17.9Z"/></svg></div>
-    <p class="pt-tag pt-display">YOU GOT THIS.</p>
-    <p class="pt-sub">나를 위해 확보한 시간, 그 시간에 신는 것.<br />Movement Gear from Vancouver.</p>
-  </section>
-
-  <section class="pt-section pt-origin">
-    <div class="pt-inner pt-grid">
-      <div>
-        <p class="pt-label pt-display">From Vancouver</p>
-        <h2>밴쿠버의 스튜디오,<br />온전히 나에게 쓰는<br /><span class="pt-accent">50분</span>에서 시작됐습니다</h2>
-      </div>
-      <p>캐나다 밴쿠버의 어느 라그리 스튜디오. 일과 일정에 쫓기던 하루 중, 온전히 나를 위해 쓰는 50분이 있었습니다. 몸의 감각에만 집중하는 그 시간이 하루를 지탱한다는 것을 알게 됐고 — 그 시간을 더 완전하게 만드는 장비를 직접 만들기로 했습니다. PELTA는 그렇게, 운동이 아니라 '나를 위한 시간'에서 출발한 브랜드입니다.</p>
-    </div>
-  </section>
-
-  <section class="pt-section pt-statement">
-    <div class="pt-inner">
-      <h2>운동복은 갖춰 입으면서<br />양말은 아무거나 신는 <em>사람들에게.</em></h2>
-      <p>필라테스, 라그리, 러닝 — 몸을 위해 확보한 그 시간에 발끝까지 준비된 사람과 아닌 사람의 차이를 압니다. PELTA는 미끄러짐을 잡는 그립, 하루의 무브를 버티는 착용감, 옷과 공간에 어울리는 무드로 그 시간을 완성합니다.</p>
-    </div>
-  </section>
-
-  <section class="pt-active" id="pt-active">
-    <div class="pt-active-head">
-      <p class="pt-label pt-display" style="color:#C9B8F0;">In Motion</p>
-      <h2 class="pt-h2" style="color:#fff;">신는 순간, 무브가 달라집니다</h2>
-    </div>
-    <div class="pt-scrolly" id="ptScrolly">
-      <div class="pt-media-col">
-        <div class="pt-media-frame" id="ptMediaFrame" data-mode="0">
-          <svg class="pt-foot-stage" viewBox="0 0 200 330" xmlns="http://www.w3.org/2000/svg" aria-label="PELTA 그립 애니메이션">
-            <circle class="pt-ring" cx="100" cy="165" r="118" />
-            <circle class="pt-ring r2" cx="100" cy="165" r="140" />
-            <g>
-              <line class="pt-tick" x1="100" y1="10"  x2="100" y2="28" />
-              <line class="pt-tick" x1="100" y1="320" x2="100" y2="302" />
-              <line class="pt-tick" x1="14"  y1="165" x2="32"  y2="165" />
-              <line class="pt-tick" x1="186" y1="165" x2="168" y2="165" />
-              <line class="pt-tick" x1="176" y1="70"  x2="163" y2="83" />
-              <line class="pt-tick" x1="24"  y1="70"  x2="37"  y2="83" />
-              <line class="pt-tick" x1="176" y1="260" x2="163" y2="247" />
-              <line class="pt-tick" x1="24"  y1="260" x2="37"  y2="247" />
-            </g>
-            <g class="pt-foot-rotor" id="ptFootRotor">
-              <g transform="translate(0,15)">
-                <path d="M70 26 C40 40 52 90 56 118 C60 148 52 178 62 218 C70 254 84 282 102 282 C126 282 140 252 138 216 C136 184 146 150 148 116 C150 82 148 44 122 32 C104 24 86 20 70 26 Z" fill="#1E1930" stroke="#8A63D2" stroke-width="2.5" />
-                <circle class="pt-dot" cx="74" cy="49" r="4" style="animation-delay:0.00s"/><circle class="pt-dot" cx="89" cy="49" r="4" style="animation-delay:0.18s"/><circle class="pt-dot" cx="104" cy="49" r="4" style="animation-delay:0.36s"/><circle class="pt-dot" cx="119" cy="49" r="4" style="animation-delay:0.54s"/><circle class="pt-dot" cx="82" cy="64" r="4" style="animation-delay:0.72s"/><circle class="pt-dot" cx="97" cy="64" r="4" style="animation-delay:0.90s"/><circle class="pt-dot" cx="112" cy="64" r="4" style="animation-delay:1.08s"/><circle class="pt-dot" cx="127" cy="64" r="4" style="animation-delay:1.26s"/><circle class="pt-dot" cx="82" cy="94" r="4" style="animation-delay:1.44s"/><circle class="pt-dot" cx="97" cy="94" r="4" style="animation-delay:0.00s"/><circle class="pt-dot" cx="112" cy="94" r="4" style="animation-delay:0.18s"/><circle class="pt-dot" cx="127" cy="94" r="4" style="animation-delay:0.36s"/><circle class="pt-dot" cx="74" cy="109" r="4" style="animation-delay:0.54s"/><circle class="pt-dot" cx="89" cy="109" r="4" style="animation-delay:0.72s"/><circle class="pt-dot" cx="104" cy="109" r="4" style="animation-delay:0.90s"/><circle class="pt-dot" cx="119" cy="109" r="4" style="animation-delay:1.08s"/><circle class="pt-dot" cx="134" cy="109" r="4" style="animation-delay:1.26s"/><circle class="pt-dot" cx="82" cy="124" r="4" style="animation-delay:1.44s"/><circle class="pt-dot" cx="97" cy="124" r="4" style="animation-delay:0.00s"/><circle class="pt-dot" cx="112" cy="124" r="4" style="animation-delay:0.18s"/><circle class="pt-dot" cx="127" cy="124" r="4" style="animation-delay:0.36s"/><circle class="pt-dot" cx="89" cy="139" r="4" style="animation-delay:0.54s"/><circle class="pt-dot" cx="104" cy="139" r="4" style="animation-delay:0.72s"/><circle class="pt-dot" cx="119" cy="139" r="4" style="animation-delay:0.90s"/><circle class="pt-dot" cx="82" cy="154" r="4" style="animation-delay:1.08s"/><circle class="pt-dot" cx="97" cy="154" r="4" style="animation-delay:1.26s"/><circle class="pt-dot" cx="112" cy="154" r="4" style="animation-delay:1.44s"/><circle class="pt-dot" cx="74" cy="169" r="4" style="animation-delay:0.00s"/><circle class="pt-dot" cx="89" cy="169" r="4" style="animation-delay:0.18s"/><circle class="pt-dot" cx="104" cy="169" r="4" style="animation-delay:0.36s"/><circle class="pt-dot" cx="119" cy="169" r="4" style="animation-delay:0.54s"/><circle class="pt-dot" cx="82" cy="184" r="4" style="animation-delay:0.72s"/><circle class="pt-dot" cx="97" cy="184" r="4" style="animation-delay:0.90s"/><circle class="pt-dot" cx="112" cy="184" r="4" style="animation-delay:1.08s"/><circle class="pt-dot" cx="89" cy="199" r="4" style="animation-delay:1.26s"/><circle class="pt-dot" cx="104" cy="199" r="4" style="animation-delay:1.44s"/><circle class="pt-dot" cx="97" cy="214" r="4" style="animation-delay:0.00s"/><circle class="pt-dot" cx="112" cy="214" r="4" style="animation-delay:0.18s"/><circle class="pt-dot" cx="74" cy="229" r="4" style="animation-delay:0.36s"/><circle class="pt-dot" cx="89" cy="229" r="4" style="animation-delay:0.54s"/><circle class="pt-dot" cx="104" cy="229" r="4" style="animation-delay:0.72s"/><circle class="pt-dot" cx="119" cy="229" r="4" style="animation-delay:0.90s"/><circle class="pt-dot" cx="82" cy="244" r="4" style="animation-delay:1.08s"/><circle class="pt-dot" cx="97" cy="244" r="4" style="animation-delay:1.26s"/><circle class="pt-dot" cx="112" cy="244" r="4" style="animation-delay:1.44s"/><circle class="pt-dot" cx="127" cy="244" r="4" style="animation-delay:0.00s"/><circle class="pt-dot" cx="89" cy="259" r="4" style="animation-delay:0.18s"/><circle class="pt-dot" cx="104" cy="259" r="4" style="animation-delay:0.36s"/><circle class="pt-dot" cx="119" cy="259" r="4" style="animation-delay:0.54s"/>
-              </g>
-            </g>
-          </svg>
-          <p class="pt-caption pt-display">GRIP &#183; CHARGED</p>
-        </div>
-      </div>
-      <div class="pt-steps">
-        <div class="pt-step" data-step="0">
-          <p class="pt-no">01 &#8212; GRIP</p>
-          <h3>바닥을 잡는 순간,<br />동작이 달라집니다</h3>
-          <p>기구 위에서도, 매트 위에서도 미끄러짐 걱정 없이. 발이 버텨주면 몸은 동작에만 집중합니다.</p>
-        </div>
-        <div class="pt-step" data-step="1">
-          <p class="pt-no">02 &#8212; MOVE</p>
-          <h3>버티고, 밀고,<br />끝까지 밀어붙이는 무브</h3>
-          <p>라그리의 마지막 3초, 러닝의 마지막 1km. 하루의 무브를 끝까지 버티는 착용감으로 설계했습니다.</p>
-        </div>
-        <div class="pt-step" data-step="2">
-          <p class="pt-no">03 &#8212; EVERYDAY</p>
-          <h3>스튜디오 밖에서도<br />무드는 계속됩니다</h3>
-          <p>운동복에도, 일상복에도. 스튜디오에서 스트리트까지 이어지는 PELTA의 무드.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="pt-section" id="pt-products">
-    <div class="pt-inner">
-      <p class="pt-label pt-display">Line-up</p>
-      <h2 class="pt-h2">무브를 위한 기어</h2>
-      <div class="pt-products">
-        <div class="pt-product">
-          <div class="pt-photo"><img src="images/pelta-grip-1.jpg" alt="그립삭스" onerror="this.remove()" /><span>GRIP SOCKS 01</span></div>
-          <h3>그립삭스</h3><p>필라테스 &#183; 라그리 &#183; 요가</p>
-        </div>
-        <div class="pt-product">
-          <div class="pt-photo"><img src="images/pelta-grip-2.jpg" alt="그립삭스" onerror="this.remove()" /><span>GRIP SOCKS 02</span></div>
-          <h3>그립삭스</h3><p>필라테스 &#183; 라그리 &#183; 요가</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="pt-band">
-    <div class="pt-band-inner">
-      <span>PILATES <b>&#183;</b> LAGREE <b>&#183;</b> RUNNING <b>&#183;</b> EVERYDAY <b>&#183;</b> YOU GOT THIS <b>&#183;</b>&nbsp;</span>
-      <span>PILATES <b>&#183;</b> LAGREE <b>&#183;</b> RUNNING <b>&#183;</b> EVERYDAY <b>&#183;</b> YOU GOT THIS <b>&#183;</b>&nbsp;</span>
-    </div>
-  </div>
-
-  <section class="pt-section pt-cta" id="pt-store">
-    <div class="pt-inner">
-      <h2 class="pt-display">MOVE <span class="pt-accent">FIRST.</span></h2>
-      <a class="pt-btn" href="#">STORE &#8212; COMING SOON</a>
-      <p class="pt-note">스토어 오픈 소식은 인스타그램에서 가장 먼저 전해드립니다</p>
-    </div>
-  </section>
-
-  <div class="pt-footer">
-    <span>PELTA &#8212; a brand of <a href="index.html">HeartPlanet Inc.</a></span>
-    <span>서울특별시 광진구 능동로 120 &#183; 사업자등록번호 674-86-02439</span>
-  </div>
-
+<header class="pt-head">
+  <div class="pt-head__in">
+    <button class="pt-head__burger" type="button" aria-expanded="false" aria-controls="pt-nav" aria-label="메뉴 열기"><span></span></button>
+    <a class="pt-head__logo" href="/"><img src="/images/logo.png" alt="Pelta"></a>
+    <nav class="pt-nav" id="pt-nav" aria-label="주 메뉴">
+      <ul class="pt-nav__list">
+        <li class="pt-nav__item pt-nav__item--mega"><a class="pt-nav__top" href="#all">Socks</a>
+<div class="pt-mega">
+<div class="pt-mega__in">
+<div class="pt-mega__col"><p class="pt-mega__title">Socks</p><ul><li><a href="#all">Grip socks</a></li><li><a href="#all">Toe socks</a></li></ul></div>
+<div class="pt-mega__col"><p class="pt-mega__title">Colors</p><ul class="pt-mega__colors"><li><a href="#collection">matcha</a></li><li><a href="#collection">lavender</a></li><li><a href="#collection">cherry pie</a></li><li><a href="#collection">peach yogurt</a></li><li><a href="#collection">lemon squishy</a></li><li><a href="#collection">lilac</a></li><li><a href="#collection">pistachio</a></li></ul></div>
+<div class="pt-mega__col"><p class="pt-mega__title">Shop</p><ul><li><a href="#all">All</a></li><li><a href="#all">Best</a></li><li><a href="#all">Sets</a></li></ul></div>
+<a class="pt-mega__card" href="#collection"><span class="pt-mega__img"><img src="/images/mega-1.jpg" alt=""></span><span>Signature lavender</span></a>
+<a class="pt-mega__card" href="#all"><span class="pt-mega__img"><img src="/images/mega-2.jpg" alt=""></span><span>A cheer underfoot: You Got This</span></a>
 </div>
-
+</div>
+        </li>
+        <li class="pt-nav__item"><a class="pt-nav__top" href="#all">Collection</a></li>
+        <li class="pt-nav__item"><a class="pt-nav__top" href="#all">Lagree</a></li>
+        <li class="pt-nav__item"><a class="pt-nav__top" href="#all">Pilates</a></li>
+        <li class="pt-nav__item"><a class="pt-nav__top" href="#all">Activewear</a></li>
+        <li class="pt-nav__item"><a class="pt-nav__top" href="#all">Recovery &amp; Care</a></li>
+        <li class="pt-nav__item"><a class="pt-nav__top" href="#all">Straps &amp; Bands</a></li>
+        <li class="pt-nav__item"><a class="pt-nav__top" href="#all">Accessories</a></li>
+      </ul>
+    </nav>
+    <div class="pt-head__util">
+      <a href="#">Search</a>
+      <a href="#">Account</a>
+      <a href="#">Cart</a>
+    </div>
+  </div>
+</header>
+<style>
+.pt-head{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #EEE9F4;font-family:var(--pt-kr);color:var(--pt-ink);}
+.pt-head__in{max-width:1440px;margin:0 auto;padding:0 var(--pt-pad);height:68px;display:flex;align-items:center;gap:40px;}
+.pt-head__logo img{height:26px;width:auto;display:block;}
+.pt-nav{flex:1;}
+.pt-nav__list{list-style:none;margin:0;padding:0;display:flex;gap:28px;}
+.pt-nav__top{display:block;line-height:68px;font-size:14px;color:inherit;text-decoration:none;white-space:nowrap;}
+.pt-nav__top:hover{color:var(--pt-purple);}
+.pt-head__util{display:flex;gap:20px;font-size:13px;}
+.pt-head__util a{color:inherit;text-decoration:none;}
+.pt-head a:focus-visible,.pt-head button:focus-visible{outline:2px solid var(--pt-purple);outline-offset:3px;}
+.pt-mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid #EEE9F4;box-shadow:0 24px 40px -24px rgba(29,20,40,.18);opacity:0;visibility:hidden;transition:opacity .2s;}
+.pt-nav__item--mega:hover .pt-mega,.pt-nav__item--mega:focus-within .pt-mega{opacity:1;visibility:visible;}
+.pt-mega__in{max-width:1440px;margin:0 auto;padding:36px var(--pt-pad) 44px;display:grid;grid-template-columns:repeat(3,minmax(120px,1fr)) repeat(2,minmax(180px,220px));gap:32px;}
+.pt-mega__title{font-size:12px;color:var(--pt-mute);margin:0 0 14px;}
+.pt-mega ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+.pt-mega ul a{color:inherit;text-decoration:none;font-size:14px;}
+.pt-mega ul a:hover{color:var(--pt-purple);}
+.pt-mega__colors a{font-family:var(--pt-en);font-style:italic;font-size:19px !important;}
+.pt-mega__card{display:flex;flex-direction:column;gap:10px;color:inherit;text-decoration:none;font-size:13px;}
+.pt-mega__img{aspect-ratio:3/4;background:var(--pt-mist);overflow:hidden;}
+.pt-mega__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;}
+.pt-mega__card:hover img{transform:scale(1.04);}
+.pt-head__burger{display:none;width:40px;height:40px;border:0;background:none;padding:0;cursor:pointer;}
+.pt-head__burger span,.pt-head__burger span::before,.pt-head__burger span::after{display:block;width:20px;height:1.5px;background:var(--pt-ink);position:relative;margin:0 auto;}
+.pt-head__burger span::before,.pt-head__burger span::after{content:"";position:absolute;left:0;}
+.pt-head__burger span::before{top:-6px;} .pt-head__burger span::after{top:6px;}
+@media (max-width:1100px){
+  .pt-head__in{gap:16px;}
+  .pt-head__burger{display:block;}
+  .pt-head__logo{margin-right:auto;}
+  .pt-head__util a:not(:last-child){display:none;}
+  .pt-nav{position:fixed;inset:68px 0 0 0;background:#fff;overflow-y:auto;padding:16px var(--pt-pad) 40px;display:none;}
+  .pt-head.is-open .pt-nav{display:block;}
+  .pt-nav__list{flex-direction:column;gap:0;}
+  .pt-nav__top{line-height:54px;font-size:17px;border-bottom:1px solid #EEE9F4;}
+  .pt-mega{position:static;opacity:1;visibility:visible;box-shadow:none;border:0;}
+  .pt-mega__in{grid-template-columns:1fr 1fr;padding:20px 0;gap:24px;}
+  .pt-mega__card{display:none;}
+}
+</style>
 <script>
-(function () {
-  var frame = document.getElementById('ptMediaFrame');
-  var rotor = document.getElementById('ptFootRotor');
-  var scrolly = document.getElementById('ptScrolly');
-  if (!frame || !rotor || !scrolly) return;
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function(){var h=document.querySelector('.pt-head'),b=h&&h.querySelector('.pt-head__burger');if(!b)return;
+b.addEventListener('click',function(){var o=h.classList.toggle('is-open');b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'메뉴 닫기':'메뉴 열기');});})();
+</script>
+<main>
 
-  function onScroll() {
-    var rect = scrolly.getBoundingClientRect();
-    var total = rect.height - window.innerHeight;
-    if (total <= 0) return;
-    var p = Math.min(1, Math.max(0, -rect.top / total));
-    var wobble = Math.sin(p * Math.PI * 4) * 14;
-    var spin = p * 360;
-    var scale = 0.94 + Math.sin(p * Math.PI) * 0.1;
-    rotor.style.transform = 'rotate(' + (spin + wobble) + 'deg) scale(' + scale + ')';
-  }
-  if (!reduced) {
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { onScroll(); ticking = false; });
-    }, { passive: true });
-    onScroll();
-  }
+<section class="pt-hero">
+  <div class="pt-hero__film">
+    <video autoplay muted loop playsinline preload="metadata" poster="/images/hero.jpg" aria-label="PELTA 패션 필름">
+      <source src="/images/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="pt-hero__text">
+    <h1 class="pt-hero__title pt-en">A little support in every move.</h1>
+    <div class="pt-hero__side">
+      <p class="pt-hero__sub">모든 움직임에 작은 응원을</p>
+      <a class="pt-btn" href="#all">컬렉션 보기</a>
+    </div>
+  </div>
+</section>
+<style>
+.pt-hero{background:var(--pt-cream);font-family:var(--pt-kr);color:var(--pt-ink);}
+.pt-hero__film{position:relative;height:min(100vh,1000px);min-height:520px;background:var(--pt-ink);overflow:hidden;}
+.pt-hero__film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.pt-hero__text{max-width:1440px;margin:0 auto;padding:clamp(48px,7vw,104px) var(--pt-pad);display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;}
+.pt-hero__title{font-size:clamp(48px,7vw,112px);line-height:.95;letter-spacing:-.02em;margin:0;color:var(--pt-purple);max-width:12ch;}
+.pt-hero__side{display:flex;flex-direction:column;align-items:flex-start;gap:20px;}
+.pt-hero__sub{font-size:clamp(17px,1.6vw,21px);font-weight:500;margin:0;}
+@media (max-width:900px){.pt-hero__film{height:auto;aspect-ratio:4/5;min-height:0;}}
+</style>
+<div id="collection">
+<section class="pt-sec pt-colors">
+  <div class="pt-wrap">
+    <ul class="pt-colors__row">
+    <li class="pt-color">
+      <a href="#collection">
+        <span class="pt-color__img"><img class="pt-color__main" src="/images/matcha.jpg" alt="PELTA matcha"><img class="pt-color__hover" src="/images/matcha-model.jpg" alt=""></span>
+        <span class="pt-color__name pt-en">matcha</span>
+        <span class="pt-color__story">차분하고 산뜻하게, 첫 동작을 시작할 준비.</span>
+      </a>
+    </li>
+    <li class="pt-color">
+      <a href="#collection">
+        <span class="pt-color__img"><img class="pt-color__main" src="/images/lavender.jpg" alt="PELTA lavender"><img class="pt-color__hover" src="/images/lavender-model.jpg" alt=""></span>
+        <span class="pt-color__name pt-en">lavender</span>
+        <span class="pt-color__story">수업 끝나고 길게 내쉬는 숨의 색.</span>
+      </a>
+    </li>
+    <li class="pt-color">
+      <a href="#collection">
+        <span class="pt-color__img"><img class="pt-color__main" src="/images/cherry-pie.jpg" alt="PELTA cherry pie"><img class="pt-color__hover" src="/images/cherry-pie-model.jpg" alt=""></span>
+        <span class="pt-color__name pt-en">cherry pie</span>
+        <span class="pt-color__story">조금 달콤하고, 조금 대담하게.</span>
+      </a>
+    </li>
+    <li class="pt-color">
+      <a href="#collection">
+        <span class="pt-color__img"><img class="pt-color__main" src="/images/peach-yogurt.jpg" alt="PELTA peach yogurt"><img class="pt-color__hover" src="/images/peach-yogurt-model.jpg" alt=""></span>
+        <span class="pt-color__name pt-en">peach yogurt</span>
+        <span class="pt-color__story">그저 시작만 하면 되는 날을 위해.</span>
+      </a>
+    </li>
+    <li class="pt-color">
+      <a href="#collection">
+        <span class="pt-color__img"><img class="pt-color__main" src="/images/lemon-squishy.jpg" alt="PELTA lemon squishy"><img class="pt-color__hover" src="/images/lemon-squishy-model.jpg" alt=""></span>
+        <span class="pt-color__name pt-en">lemon squishy</span>
+        <span class="pt-color__story">문을 나서게 할 만큼 환하게.</span>
+      </a>
+    </li>
+    <li class="pt-color">
+      <a href="#collection">
+        <span class="pt-color__img"><img class="pt-color__main" src="/images/lilac.jpg" alt="PELTA lilac"><img class="pt-color__hover" src="/images/lilac-model.jpg" alt=""></span>
+        <span class="pt-color__name pt-en">lilac</span>
+        <span class="pt-color__story">발목부터 발끝까지 차분하게.</span>
+      </a>
+    </li>
+    <li class="pt-color">
+      <a href="#collection">
+        <span class="pt-color__img"><img class="pt-color__main" src="/images/pistachio.jpg" alt="PELTA pistachio"><img class="pt-color__hover" src="/images/pistachio-model.jpg" alt=""></span>
+        <span class="pt-color__name pt-en">pistachio</span>
+        <span class="pt-color__story">한 걸음 더 나아가고 싶은 날을 위해.</span>
+      </a>
+    </li>
+    </ul>
+  </div>
+</section>
+<style>
+.pt-colors{background:#fff;}
+.pt-colors__row{list-style:none;margin:0;padding:0 0 8px;display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;}
+.pt-color{scroll-snap-align:start;}
+.pt-color a{display:flex;flex-direction:column;gap:6px;color:inherit;text-decoration:none;}
+.pt-color__img{position:relative;display:block;aspect-ratio:3/4;background:var(--pt-mist);overflow:hidden;margin-bottom:10px;}
+.pt-color__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease,transform .6s ease;}
+.pt-color__hover{opacity:0;}
+@media (hover:hover){
+  .pt-color a:hover .pt-color__hover{opacity:1;}
+  .pt-color a:hover .pt-color__main{transform:scale(1.03);}
+}
+.pt-color__name{font-size:28px;line-height:1.1;}
+.pt-color__story{font-size:15px;line-height:1.6;color:var(--pt-mute);}
+.pt-color a:focus-visible{outline:2px solid var(--pt-purple);outline-offset:4px;}
+@media (min-width:700px){.pt-colors__row{grid-auto-columns:calc((100% - 48px)/2.3);}}
+@media (min-width:1100px){.pt-colors__row{grid-auto-columns:calc((100% - 48px)/4);}}
+</style></div>
 
-  var steps = document.querySelectorAll('.pt-step');
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      frame.setAttribute('data-mode', entry.target.getAttribute('data-step'));
-    });
-  }, { threshold: 0.55 });
-  steps.forEach(function (s) { io.observe(s); });
+<section class="pt-film">
+  <video autoplay muted loop playsinline preload="metadata" poster="/images/film.jpg" aria-label="PELTA 필름">
+    <source src="/images/film.mp4" type="video/mp4">
+  </video>
+</section>
+<style>
+.pt-film{position:relative;width:100%;aspect-ratio:16/9;max-height:100vh;background:var(--pt-ink);overflow:hidden;}
+.pt-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+</style>
+<section class="pt-sec pt-products" id="best"><div class="pt-wrap"><h2 class="pt-h2" style="margin-bottom:32px">Best</h2><ul class="pt-p"><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/matcha.jpg" alt="PELTA 그립삭스 matcha" loading="lazy"><img class="pt-p__hover" src="/images/matcha-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">matcha</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/lavender.jpg" alt="PELTA 그립삭스 lavender" loading="lazy"><img class="pt-p__hover" src="/images/lavender-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">lavender</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/cherry-pie.jpg" alt="PELTA 그립삭스 cherry pie" loading="lazy"><img class="pt-p__hover" src="/images/cherry-pie-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">cherry pie</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/peach-yogurt.jpg" alt="PELTA 그립삭스 peach yogurt" loading="lazy"><img class="pt-p__hover" src="/images/peach-yogurt-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">peach yogurt</span></p><p class="pt-p__price">25,000원</p></a></li></ul></div></section>
+<section class="pt-sec pt-story">
+  <div class="pt-wrap pt-story__inner">
+    <p class="pt-story__lead">퇴근길에 운동 가방을 챙기고,<br>쉴까 하다 결국 현관 앞에 서는 것.</p>
+    <h2 class="pt-story__title">운동에서 가장 큰 에너지가 필요한 순간은,<br>운동하러 가는 문을 여는 그때입니다.</h2>
+    <p class="pt-story__close">PELTA는 그 문을 여는 순간부터 함께합니다.</p>
+    <a class="pt-link" href="#">브랜드 이야기 보기</a>
+  </div>
+</section>
+<style>
+.pt-story{background:var(--pt-purple);color:var(--pt-cream);}
+.pt-story__inner{max-width:880px;display:flex;flex-direction:column;gap:24px;}
+.pt-story__lead{font-size:17px;line-height:1.8;color:var(--pt-lav);margin:0;}
+.pt-story__title{font-family:var(--pt-kr);font-weight:700;letter-spacing:-.02em;font-size:clamp(26px,3.4vw,44px);line-height:1.45;margin:0;color:#fff;}
+.pt-story__close{font-size:18px;font-weight:500;color:var(--pt-lime);margin:0 0 8px;}
+.pt-story .pt-link{color:var(--pt-cream);}
+</style>
+<section class="pt-sec pt-size">
+  <div class="pt-wrap pt-size__grid">
+    <div class="pt-size__text">
+      <h2 class="pt-h2">원 사이즈 대신,<br>발에 맞는 사이즈</h2>
+      <p class="pt-body">가장 정확하게 발을 잡아줄 수 있도록 사이즈 다양화를 하였습니다.</p>
+    </div>
+    <div class="pt-size__stage" role="img" aria-label="작은 발 225–245mm와 큰 발 245–265mm 두 가지 사이즈">
+      <svg class="pt-size__sock" viewBox="0 0 420 300" aria-hidden="true">
+        <g class="pt-size__shape">
+          <path d="M120 24 H200 V150 C200 175 225 190 260 198 L335 212 C368 218 382 238 378 255 C374 270 360 276 335 276 H140 C112 276 96 258 100 232 C104 205 118 190 120 160 Z" fill="var(--pt-lav)"/>
+          <rect x="120" y="44" width="80" height="12" fill="var(--pt-purple)"/>
+          <rect x="120" y="64" width="80" height="12" fill="var(--pt-purple)"/>
+          <g fill="var(--pt-purple)"><circle cx="150" cy="276" r="5"/><circle cx="176" cy="276" r="5"/><circle cx="202" cy="276" r="5"/><circle cx="228" cy="276" r="5"/><circle cx="254" cy="276" r="5"/><circle cx="280" cy="276" r="5"/><circle cx="306" cy="276" r="5"/><circle cx="332" cy="276" r="5"/></g>
+        </g>
+      </svg>
+      <div class="pt-size__labels" aria-hidden="true">
+        <p class="pt-size__lab pt-size__lab--s"><span>작은 발</span><b class="pt-en">225–245mm</b></p>
+        <p class="pt-size__lab pt-size__lab--l"><span>큰 발</span><b class="pt-en">245–265mm</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.pt-size{background:var(--pt-cream);}
+.pt-size__grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(32px,6vw,96px);align-items:center;}
+.pt-size__text{display:flex;flex-direction:column;gap:20px;max-width:440px;}
+.pt-size__stage{position:relative;background:#fff;border-radius:28px;padding:clamp(24px,4vw,48px);display:flex;flex-direction:column;gap:12px;}
+.pt-size__sock{width:100%;height:auto;overflow:visible;}
+.pt-size__shape{transform-box:fill-box;transform-origin:0% 100%;animation:pt-grow 5s ease-in-out infinite;}
+.pt-size__labels{position:relative;height:64px;}
+.pt-size__lab{position:absolute;left:0;top:0;margin:0;display:flex;align-items:baseline;gap:14px;}
+.pt-size__lab span{font-size:15px;font-weight:700;color:var(--pt-purple);}
+.pt-size__lab b{font-weight:400;font-size:clamp(36px,4vw,56px);line-height:1;color:var(--pt-ink);}
+.pt-size__lab--s{animation:pt-lab-s 5s ease-in-out infinite;}
+.pt-size__lab--l{animation:pt-lab-l 5s ease-in-out infinite;}
+@keyframes pt-grow{0%,35%{transform:scale(.8);}50%,85%{transform:scale(1);}100%{transform:scale(.8);}}
+@keyframes pt-lab-s{0%,35%{opacity:1;}45%,90%{opacity:0;}100%{opacity:1;}}
+@keyframes pt-lab-l{0%,40%{opacity:0;}50%,85%{opacity:1;}95%,100%{opacity:0;}}
+@media (prefers-reduced-motion:reduce){.pt-size__shape,.pt-size__lab{animation:none;}.pt-size__lab--l{top:40px;}.pt-size__labels{height:110px;}}
+@media (max-width:900px){.pt-size__grid{grid-template-columns:1fr;}}
+</style>
+<section class="pt-sec pt-products" id="all"><div class="pt-wrap"><h2 class="pt-h2" style="margin-bottom:32px">All products</h2><ul class="pt-p"><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/matcha.jpg" alt="PELTA 그립삭스 matcha" loading="lazy"><img class="pt-p__hover" src="/images/matcha-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">matcha</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/lavender.jpg" alt="PELTA 그립삭스 lavender" loading="lazy"><img class="pt-p__hover" src="/images/lavender-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">lavender</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/cherry-pie.jpg" alt="PELTA 그립삭스 cherry pie" loading="lazy"><img class="pt-p__hover" src="/images/cherry-pie-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">cherry pie</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/peach-yogurt.jpg" alt="PELTA 그립삭스 peach yogurt" loading="lazy"><img class="pt-p__hover" src="/images/peach-yogurt-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">peach yogurt</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/lemon-squishy.jpg" alt="PELTA 그립삭스 lemon squishy" loading="lazy"><img class="pt-p__hover" src="/images/lemon-squishy-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">lemon squishy</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/lilac.jpg" alt="PELTA 그립삭스 lilac" loading="lazy"><img class="pt-p__hover" src="/images/lilac-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">lilac</span></p><p class="pt-p__price">25,000원</p></a></li><li><a href="#"><div class="pt-p__img"><img class="pt-p__main" src="/images/pistachio.jpg" alt="PELTA 그립삭스 pistachio" loading="lazy"><img class="pt-p__hover" src="/images/pistachio-model.jpg" alt="" loading="lazy"></div><p class="pt-p__name">PELTA Grip Socks <span class="pt-en">pistachio</span></p><p class="pt-p__price">25,000원</p></a></li></ul></div></section>
+
+<section class="pt-sec pt-ugc">
+  <div class="pt-wrap">
+    <div class="pt-ugc__head">
+      <h2 class="pt-h2">바닥에선 나만 보고,<br>발을 들면 모두가 봅니다</h2>
+      <a class="pt-btn" href="https://www.instagram.com/" target="_blank" rel="noopener">@인스타그램 계정</a>
+    </div>
+    <div class="pt-ugc__feed" id="pt-ig-feed"></div>
+    <ul class="pt-ugc__grid">
+      <li><img src="/images/ugc-1.jpg" alt="PELTA 인스타그램 게시물"></li>
+      <li><img src="/images/ugc-2.jpg" alt="PELTA 인스타그램 게시물"></li>
+      <li><img src="/images/ugc-3.jpg" alt="PELTA 인스타그램 게시물"></li>
+      <li><img src="/images/ugc-4.jpg" alt="PELTA 인스타그램 게시물"></li>
+      <li><img src="/images/ugc-5.jpg" alt="PELTA 인스타그램 게시물"></li>
+      <li><img src="/images/ugc-6.jpg" alt="PELTA 인스타그램 게시물"></li>
+    </ul>
+  </div>
+</section>
+<style>
+.pt-ugc{background:#fff;}
+.pt-ugc__head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px;}
+.pt-ugc__feed:empty{display:none;}
+.pt-ugc__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.pt-ugc__grid li{aspect-ratio:1;background:var(--pt-mist);overflow:hidden;}
+.pt-ugc__grid img{width:100%;height:100%;object-fit:cover;display:block;}
+@media (max-width:900px){.pt-ugc__feed:empty{display:none;}
+.pt-ugc__grid{grid-template-columns:repeat(3,1fr);}}
+</style>
+</main>
+
+<footer class="pt-foot">
+  <div class="pt-foot__in">
+    <p class="pt-foot__tag pt-en">A little support in every move.</p>
+    <div class="pt-foot__cols">
+      <ul><li><a href="#">고객센터</a></li><li><a href="#">배송 및 반품</a></li><li><a href="#">사이즈 가이드</a></li></ul>
+      <ul><li><a href="#">브랜드 이야기</a></li><li><a href="https://www.instagram.com/" target="_blank" rel="noopener">인스타그램</a></li><li><a href="#">회원 가입</a></li></ul>
+      <ul><li><a href="#">이용약관</a></li><li><a href="#"><strong>개인정보처리방침</strong></a></li></ul>
+    </div>
+    <div class="pt-foot__biz">
+      <p>하트플래닛컴퍼니 주식회사 · 대표 이요안나 · 사업자등록번호 674-86-02439</p>
+      <p>서울특별시 광진구 능동로 120 · 0507-1454-1580 · contact@heartplanetcompany.com</p>
+      <p>© PELTA</p>
+    </div>
+  </div>
+</footer>
+<style>
+.pt-foot{background:var(--pt-ink);color:var(--pt-cream);font-family:var(--pt-kr);padding:72px var(--pt-pad) 48px;}
+.pt-foot__in{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;}
+.pt-foot__tag{font-size:clamp(32px,4vw,52px);line-height:1.05;margin:0;color:var(--pt-lav);}
+.pt-foot__cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pt-foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;}
+.pt-foot a{color:var(--pt-cream);text-decoration:none;font-size:14px;}
+.pt-foot a:hover{color:var(--pt-lime);}
+.pt-foot__biz{grid-column:1/-1;border-top:1px solid #3A3145;padding-top:28px;font-size:12px;line-height:1.9;color:#A79DB5;}
+.pt-foot__biz p{margin:0;}
+@media (max-width:900px){.pt-foot__in{grid-template-columns:1fr;}}
+</style>
+
+<div class="pt-pop" id="pt-pop" role="dialog" aria-modal="true" aria-labelledby="pt-pop-title" hidden>
+  <div class="pt-pop__card">
+    <button class="pt-pop__close" type="button" aria-label="닫기">×</button>
+    <p class="pt-pop__kicker pt-en">Join the club</p>
+    <h2 class="pt-pop__title" id="pt-pop-title">첫 구매 혜택,<br>메일로 먼저 받아보세요</h2>
+    <form class="pt-pop__form" method="post">
+      <label class="pt-pop__sr" for="pt-pop-email">이메일</label>
+      <input id="pt-pop-email" type="email" name="email" placeholder="이메일 주소" required autocomplete="email">
+      <label class="pt-pop__agree"><input type="checkbox" required> (필수) 이메일 수집 및 광고성 정보 수신에 동의합니다</label>
+      <button class="pt-btn" type="submit">가입하기</button>
+    </form>
+    <a class="pt-pop__join" href="#">회원가입하고 바로 혜택 받기</a>
+  </div>
+</div>
+<style>
+.pt-pop{position:fixed;inset:0;z-index:300;display:flex;align-items:flex-end;justify-content:center;padding:16px;background:rgba(29,20,40,.35);font-family:var(--pt-kr);}
+.pt-pop[hidden]{display:none;}
+.pt-pop__card{position:relative;width:min(440px,100%);background:#fff;color:var(--pt-ink);border-radius:24px;padding:40px 32px 32px;display:flex;flex-direction:column;gap:14px;animation:pt-pop-in .35s ease;}
+@keyframes pt-pop-in{from{transform:translateY(24px);opacity:0;}to{transform:none;opacity:1;}}
+.pt-pop__close{position:absolute;top:12px;right:14px;width:40px;height:40px;border:0;background:none;font-size:26px;cursor:pointer;color:var(--pt-mute);}
+.pt-pop__kicker{margin:0;font-size:22px;color:var(--pt-purple);}
+.pt-pop__title{margin:0 0 6px;font-size:24px;font-weight:700;line-height:1.35;letter-spacing:-.02em;}
+.pt-pop__form{display:flex;flex-direction:column;gap:12px;}
+.pt-pop__form input[type=email]{height:50px;border:1px solid #D9D2E3;border-radius:12px;padding:0 16px;font:16px var(--pt-kr);}
+.pt-pop__form input[type=email]:focus{outline:2px solid var(--pt-purple);outline-offset:1px;border-color:transparent;}
+.pt-pop__agree{display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--pt-mute);}
+.pt-pop__form .pt-btn{border:0;cursor:pointer;height:50px;}
+.pt-pop__join{font-size:13px;color:var(--pt-mute);text-align:center;}
+.pt-pop__sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+@media (min-width:700px){.pt-pop{align-items:center;}}
+@media (prefers-reduced-motion:reduce){.pt-pop__card{animation:none;}}
+</style>
+<script>
+(function(){
+  var pop=document.getElementById('pt-pop'); if(!pop) return;
+  var shown=false; try{shown=sessionStorage.getItem('pt-pop')==='1';}catch(e){}
+  function open(){ if(shown) return; shown=true; try{sessionStorage.setItem('pt-pop','1');}catch(e){}
+    pop.hidden=false; var i=pop.querySelector('input[type=email]'); if(i) i.focus(); window.removeEventListener('scroll',check); }
+  function close(){ pop.hidden=true; }
+  function check(){ var d=document.documentElement; if((window.scrollY+window.innerHeight)/d.scrollHeight>0.7) open(); }
+  window.addEventListener('scroll',check,{passive:true});
+  pop.querySelector('.pt-pop__close').addEventListener('click',close);
+  var f=pop.querySelector('form'); f.addEventListener('submit',function(e){ if(!f.getAttribute('action')){ e.preventDefault(); f.outerHTML='<p class="pt-pop__done">감사합니다. 첫 구매 혜택 소식을 메일로 보내드릴게요.</p>'; } });
+  pop.addEventListener('click',function(e){ if(e.target===pop) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!pop.hidden) close(); });
 })();
 </script>
-<script>
-(function () {
-  var intro = document.getElementById('ptIntro');
-  var img = document.getElementById('ptIntroImg');
-  if (!intro || !img) return;
-  var done = false;
-  function unlock() { document.documentElement.style.overflow = ''; document.body.style.overflow = ''; }
-  function enter() {
-    if (done) return;
-    done = true;
-    intro.classList.add('zooming');
-    setTimeout(function () { intro.remove(); unlock(); }, 1050);
-  }
-  function activate() {
-    intro.classList.add('ready');
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    window.scrollTo(0, 0);
-    ['wheel', 'touchmove', 'keydown'].forEach(function (ev) {
-      window.addEventListener(ev, enter, { passive: true, once: true });
-    });
-    intro.addEventListener('click', enter, { once: true });
-  }
-  img.addEventListener('load', activate);
-  // 이미지가 아직 없으면 임시 인트로(다크+로고)로 활성화 — 파일 올리면 자동으로 이미지 버전
-  img.addEventListener('error', function () { intro.classList.add('fallback'); activate(); });
-})();
-</script>
+<style>
+.pt-products{background:#fff;}
+.pt-p{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.pt-p a{color:inherit;text-decoration:none;display:block;}
+.pt-p__img{position:relative;aspect-ratio:3/4;background:var(--pt-mist);overflow:hidden;}
+.pt-p__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease,transform .6s ease;}
+.pt-p__hover{opacity:0;}
+@media (hover:hover){.pt-p a:hover .pt-p__hover{opacity:1;}.pt-p a:hover .pt-p__main{transform:scale(1.03);}}
+.pt-p__name{font-size:14px;margin:12px 0 4px;}
+.pt-p__name .pt-en{font-size:16px;}
+.pt-p__price{font-size:14px;font-weight:700;margin:0;}
+.pt-p a:focus-visible{outline:2px solid var(--pt-purple);outline-offset:4px;}
+@media (max-width:900px){.pt-p{grid-template-columns:repeat(2,1fr);}}
+</style>
+</body>
+</html>
